@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as fromImportActions from './stores/import/actions';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [],
+  template: `
+    <button (click)="startImport()">Start Import</button>
+  `,
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'concat-map-sandbox';
+  constructor(private store: Store) {}
+
+  startImport() {
+    this.store.dispatch(fromImportActions.importPhase1());
+  }
 }
